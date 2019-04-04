@@ -1,0 +1,18 @@
+package com.controller;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class BikeEndPoints {
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/testPoint", method = RequestMethod.GET)
+    public String testPoint() {
+        return "IT'S WORKING!!";
+
+    }
+}
