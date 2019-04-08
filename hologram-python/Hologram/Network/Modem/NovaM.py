@@ -64,7 +64,19 @@ class NovaM(Nova):
 
     @property
     def location(self):
-        raise NotImplementedError('The R404 and R410 do not support Cell Locate at this time')
+        #raise NotImplementedError('The R404 and R410 do not support Cell Locate at this time')
+        temp_loc = self.last_location
+        if self._set_up_pdp_context():
+            self.last_location = None
+            ok, r = self.set('+ULOC', '2,2,0,10,10')
+            if ok != ModemResult.OK:
+                self.logger.error('Location request failed')
+                return None
+            while self.last_location is None and self._is_pdp_context_active():
+                self.checkURC()
+        if self.last_location is None:
+            self.last_location = temp_loc
+        return self.last_location
 
     @property
     def operator(self):
