@@ -27,6 +27,7 @@ class NovaM(Nova):
         super(NovaM, self).__init__(device_name=device_name, baud_rate=baud_rate,
                                          chatscript_file=chatscript_file, event=event)
         self._at_sockets_available = True
+        self.last_location = None
         modem_id = self.modem_id
         self.baud_rate = '115200'
         if("R404" in modem_id):
