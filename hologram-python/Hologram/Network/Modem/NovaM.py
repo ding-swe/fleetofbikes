@@ -12,6 +12,7 @@ from Nova import Nova
 from Hologram.Event import Event
 from Exceptions.HologramError import NetworkError
 from UtilClasses import ModemResult
+from UtilClasses import Location
 
 DEFAULT_NOVAM_TIMEOUT = 200
 
@@ -68,7 +69,7 @@ class NovaM(Nova):
         temp_loc = self.last_location
         if self._set_up_pdp_context():
             self.last_location = None
-            ok, r = self.set('+ULOC', '2,2,0,10,10')
+            ok, r = self.set('+ULOC', '2,1,0,20,3')
             if ok != ModemResult.OK:
                 self.logger.error('Location request failed')
                 return None
