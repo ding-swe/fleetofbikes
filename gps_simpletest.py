@@ -111,5 +111,5 @@ while True:
                 print('Height geo ID: {} meters'.format(gps.height_geoid))
             do_send = 0
             gps_data += '\"'
-            subprocess.run(['sudo', 'hologram', 'connect'])
+            #subprocess.run(['sudo', 'hologram', 'connect'])
             subprocess.run(['sudo', 'hologram', 'send', gps_data])
