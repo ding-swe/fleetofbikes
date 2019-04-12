@@ -79,7 +79,7 @@ while True:
                 gps.timestamp_utc.tm_hour,  # not get all data like year, day,
                 gps.timestamp_utc.tm_min,   # month!
                 gps.timestamp_utc.tm_sec))
-            gps_data += 'Fix timestamp: {}/{}/{} {:02}:{:02}:{:02}\n'.format(
+            gps_data += '{}/{}/{} {:02}:{:02}:{:02}\n'.format(
                 gps.timestamp_utc.tm_mon,   # Grab parts of the time from the
                 gps.timestamp_utc.tm_mday,  # struct_time object that holds
                 gps.timestamp_utc.tm_year,  # the fix time.  Note you might
@@ -91,15 +91,15 @@ while True:
             print('Longitude: {0:.6f} degrees'.format(gps.longitude))
             gps_data += 'Longitude: {0:.6f} degrees\n'.format(gps.longitude)
             print('Fix quality: {}'.format(gps.fix_quality))
-            gps_data += 'Fix quality: {}\n'.format(gps.fix_quality)
+            #gps_data += 'Fix quality: {}\n'.format(gps.fix_quality)
             # Some attributes beyond latitude, longitude and timestamp are optional
             # and might not be present.  Check if they're None before trying to use!
             if gps.satellites is not None:
                 print('# satellites: {}'.format(gps.satellites))
-                gps_data += '# satellites: {}\n'.format(gps.satellites)
+                # gps_data += '# satellites: {}\n'.format(gps.satellites)
             if gps.altitude_m is not None:
                 print('Altitude: {} meters'.format(gps.altitude_m))
-                gps_data += 'Altitude: {} meters\n'.format(gps.altitude_m)
+                # gps_data += 'Altitude: {} meters\n'.format(gps.altitude_m)
             if gps.speed_knots is not None:
                 print('Speed: {} knots'.format(gps.speed_knots))
                 gps_data += 'Speed: {} knots\n'.format(gps.speed_knots)
