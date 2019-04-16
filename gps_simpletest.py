@@ -4,10 +4,27 @@
 import time
 import board
 import subprocess
+from request import Request
+import RPi.GPIO as GPIO
+from Exceptions.HologramError import HologramError
+from Hologram.CustomCloud import CustomCloud
 #import busio
 
 import adafruit_gps
 
+post_endpoint = ''
+post_port = 80
+post_header = ''
+get_endpoint = ''
+get_port = 80
+
+
+GPS_PERIOD = 60.0 #60 second between sending GPS coordinates
+RECV_PERIOD = 5.0 #5 second  between check if messages have arrived
+
+time_curr = 0.0
+time_gps = GPS_PERIOD
+time_recv = RECV_PERIOD
 
 # Define RX and TX pins for the board's serial port connected to the GPS.
 # These are the defaults you should use for the GPS FeatherWing.
@@ -51,18 +68,29 @@ gps.send_command(b'PMTK220,1000')
 #gps.send_command(b'PMTK220,500')
 
 # Main loop runs forever printing the location, etc. every second.
-last_print = time.monotonic()
 do_send = 1
+
+customCloud = CustomCloud(None,
+                          send_host=post_endpoint,
+                          send_port=post_port,
+                          receive_host=get_endpoint,
+                          receive_port=get_port,
+                          enable_inbound=True)
+
+time_curr = time.monotonic()
+time_gps = time_curr
+time_recv = time_curr
+
 while True:
     # Make sure to call gps.update() every loop iteration and at least twice
     # as fast as data comes from the GPS unit (usually every second).
     # This returns a bool that's true if it parsed new data (you can ignore it
     # though if you don't care and instead look at the has_fix property).
     gps.update()
+    time_curr = time.monotonic()
     # Every second print out current location details if there's a fix.
-    current = time.monotonic()
-    if current - last_print >= 1.0:
-        last_print = current
+    if time_curr - time_gps >= GPS_PERIOD:
+        time_gps = time_curr
         if not gps.has_fix:
             # Try again if we don't have a fix yet.
             print('Waiting for fix...')
@@ -87,9 +115,9 @@ while True:
                 gps.timestamp_utc.tm_min,   # month!
                 gps.timestamp_utc.tm_sec)
             print('Latitude: {0:.6f} degrees'.format(gps.latitude))
-            gps_data += 'Latitude: {0:.6f} degrees\n'.format(gps.latitude)
+            gps_data += 'Latitude: {0:.8f}\n'.format(gps.latitude)
             print('Longitude: {0:.6f} degrees'.format(gps.longitude))
-            gps_data += 'Longitude: {0:.6f} degrees\n'.format(gps.longitude)
+            gps_data += 'Longitude: {0:.8f}\n'.format(gps.longitude)
             print('Fix quality: {}'.format(gps.fix_quality))
             #gps_data += 'Fix quality: {}\n'.format(gps.fix_quality)
             # Some attributes beyond latitude, longitude and timestamp are optional
@@ -102,7 +130,7 @@ while True:
                 # gps_data += 'Altitude: {} meters\n'.format(gps.altitude_m)
             if gps.speed_knots is not None:
                 print('Speed: {} knots'.format(gps.speed_knots))
-                gps_data += 'Speed: {} knots\n'.format(gps.speed_knots)
+                gps_data += 'Speed: {}\n'.format(gps.speed_knots)
             if gps.track_angle_deg is not None:
                 print('Track angle: {} degrees'.format(gps.track_angle_deg))
             if gps.horizontal_dilution is not None:
@@ -111,5 +139,9 @@ while True:
                 print('Height geo ID: {} meters'.format(gps.height_geoid))
             do_send = 0
             gps_data += '\"'
-            #subprocess.run(['sudo', 'hologram', 'connect'])
-            subprocess.run(['sudo', 'hologram', 'send', gps_data])
+            # subprocess.run(['sudo', 'hologram', 'connect'])
+            # subprocess.run(['sudo', 'hologram', 'send', gps_data])
+            payload = {'Latitude': '{}'.format(gps.latitude), 'Longitude': '{}'.format(gps.longitude)}
+            req = Request('Post', post_endpoint, data=payload, headers=post_header)
+            print(req.text)
+    if time_curr - time_recv >= RECV_PERIOD:
