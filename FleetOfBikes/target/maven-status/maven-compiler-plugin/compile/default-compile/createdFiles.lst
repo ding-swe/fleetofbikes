@@ -1,2 +1,5 @@
+com/Entity/CoordinateService.class
 com/controller/BikeEndPoints.class
+com/Entity/CoordinateResponse.class
 com/Application.class
+com/Entity/Coordinate.class
