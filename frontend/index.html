@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Fleet of Bikes Team</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class= "sidebar-nav">
+                <li class="sidebar-brand">
+                        <img id=menu src="menu.png" alt="menu" style="z-index:10; width: 10%; text-align:left;">
+                    
+                </li>
+				<li>
+					<table style="width: 100%;"><row><td  style = "width:30%;"><a href="#">Search</a></td>
+						<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
+						</td></row></table>
+				</li>
+				<li>
+					<a href="#">Filter</a>
+				</li>
+				<li>
+					<a href="#">Overview</a>
+				</li>
+				<li>
+					<a href="#">Events</a>
+				</li>
+				</ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Fleet of Bikes Visualization</h1>
+                        <script src="http://d3js.org/d3.v3.min.js">	</script>
+						<script src="http://d3js.org/topojson.v1.min.js"></script>
+						<!-- I recommend you host this file on your own, since this will change without warning -->
+						<script src="http://datamaps.github.io/scripts/datamaps.all.min.js?v=1"></script>
+						<div id="container1" style="position: relative; width: 80%; height:600px"></div>
+
+
+						<script>
+						//basic map config with custom fills, mercator projection
+						var map = new Datamap({
+						scope: 'usa',
+						element: document.getElementById('container1'),
+						fills: {
+							defaultFill: '#f6ebc0',
+							good: '55775c',
+							bad: 'aa180d'
+						},
+						data: {
+							NY: {fillKey: 'lt50' }
+						}
+							  });
+							  map.bubbles([
+							  {
+								name: 'test',
+								radius: 20,
+								fillKey: 'bad',
+								latitude: 40.639722,
+								longitude: -73.778889
+							  },
+							  {
+								name: 'good',
+								radius: 20,
+								fillKey: 'good',
+								latitude: 39.74,
+								longitude: -104.99
+							  },
+							  {
+								popupTemplate: function(data) {
+								  return '<div class="hoverinfo">Name:' + data.name 
+								}
+							  }]);
+							  /* // update info like this
+							  map.updateChoropleth({
+								NY: {fillKey: ''},
+							  });
+							  */
+							 </script>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /#page-content-wrapper -->
+
+							</div>
+							<!-- /#wrapper -->
+
+							<!-- jQuery -->
+							<script src="js/jquery.js"></script>
+
+							<!-- Bootstrap Core JavaScript -->
+							<script src="js/bootstrap.min.js"></script>
+
+							<!-- Menu Toggle Script "#menu-toggle" -->
+							<script>
+								$(".sidebar-brand").click(function(e) {
+									e.preventDefault();
+									$("#wrapper").toggleClass("toggled");
+									$(".sidebar-brand").toggleClass("toggled");
+								});
+								
+								
+								
+								
+								document.getElementById("input").addEventListener("keydown", function(e) {
+									if (!e) { var e = window.event; }
+									//e.preventDefault(); // sometimes useful
+									// Enter is pressed
+									if (e.keyCode == 13) {alert(document.getElementById("input").value); }
+								}, false) 
+							</script>
+
+</body>
+</html>
