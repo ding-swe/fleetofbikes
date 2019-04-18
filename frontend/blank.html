@@ -1,49 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
   <head>
-
+    <title>Styled Maps - Night Mode</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-	<style>
+    <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-    	#map {
+      #map {
         height: 100%;
-     	 }
-
+      }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
-
-      #wrapper { position: absolute; top: 0px; left: 10px; z-index: 99; }
-
     </style>
-    <title>ENEE408R</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
   </head>
-
   <body>
-  	<div id="map"></div>
+    <div id="map"></div>
     <script>
       function initMap() {
         // Styles a map in night mode.
@@ -57,11 +33,22 @@
             {
               featureType: 'administrative.locality',
               elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'},{visibility: 'off'}]
+              stylers: [{color: '#d59563'}]
             },
             {
               featureType: 'poi',
-              stylers: [{visibility: 'off'}]
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
             },
             {
               featureType: 'road',
@@ -124,64 +111,5 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGLTj7eP0NLgDy62iNaDoBAaZXE0iF60U&callback=initMap"
     async defer></script>
-
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class= "sidebar-nav">
-                <li class="sidebar-brand">
-                        <img id=menu src="menu.png" alt="menu" style="z-index:10; width: 10%; text-align:left;">
-                    
-                </li>
-				<li>
-					<table style="width: 100%;"><row><td  style = "width:30%;"><a href="#">Search</a></td>
-						<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
-						</td></row></table>
-				</li>
-				<li>
-					<a href="#">Filter</a>
-				</li>
-				<li>
-					<a href="#">Overview</a>
-				</li>
-				<li>
-					<a href="#">Events</a>
-				</li>
-				</ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-      
-		<!-- /#page-content-wrapper -->
-	</div>
-	
-	<!-- /#wrapper -->
-
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-
-	<!-- Menu Toggle Script "#menu-toggle" -->
-	<script>
-		$(".sidebar-brand").click(function(e) {
-			e.preventDefault();
-			$("#wrapper").toggleClass("toggled");
-			$(".sidebar-brand").toggleClass("toggled");
-		});
-		
-		
-		
-		
-		document.getElementById("input").addEventListener("keydown", function(e) {
-			if (!e) { var e = window.event; }
-			//e.preventDefault(); // sometimes useful
-			// Enter is pressed
-			if (e.keyCode == 13) {alert(document.getElementById("input").value); }
-		}, false) 
-	</script>
-
-</body>
+  </body>
 </html>
