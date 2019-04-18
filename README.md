@@ -2,13 +2,13 @@
 Spring 2019 ENEE408R Fleet of Bikes Team 
 
 Tech Stack:
-    Frontend
+    Frontend:
 		Angular
 		Bootstrap 
 		HTML
 		CSS
         
-    Backend
+    Backend:
 		Java
 		Spring
 		Hibernate 
@@ -16,8 +16,8 @@ Tech Stack:
 			Postgress
 			
 	
-	Hardware
-    	Python
-		GPS
-		Raspberry Pi 
+	Hardware:
+    		Python
+			GPS
+			Raspberry Pi 
         
