@@ -1,21 +1,17 @@
 import requests
-from requests import Request, Session
 import logging
 import datetime
+import subprocess
 from Exceptions.HologramError import HologramError
 from Hologram.HologramCloud import HologramCloud
-from Hologram.CustomCloud import CustomCloud
+import adafruit_gps
+import board
+import RPi.GPIO as GPIO
+import serial
 
-USE_NOVA = 0
-DEFAULT_TIMEOUT = 5
 post_endpoint = 'http://Fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/testPost'
-post_endpoint_ip = '3.94.25.131'
-post_port = 80
-post_header = ''
-get_endpoint = ''
-get_port = 80
 
-fake_data = {'name': 'dick2',
+test_data = {'name': 'test_bike',
             'loc': {
                 'lat': '12.345678',
                 'lon': '-12.345678'},
@@ -24,25 +20,32 @@ fake_data = {'name': 'dick2',
 
 logging.basicConfig(filename='nova_py.log', level=logging.DEBUG)
 
-customCloud = CustomCloud(None,
-                          send_host=post_endpoint_ip,
-                          send_port=post_port,
-                          network='cellular')
-fake_data['timestamp'] = str(datetime.datetime.now())
+# Establish a PPP connection on the Pi if it is not already established
+print('Establishing PPP connection')
+subprocess.run('sudo', 'python', 'nova_estab_ppp.py')
+# Start UART communication with GPS module
+uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)
+# Create a GPS module instance.
+gps = adafruit_gps.GPS(uart, debug=False)
+# Turn on the basic GGA and RMC info
+gps.send_command(b'PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
+# Set update rate to once a second (1hz) which is what you typically want.
+gps.send_command(b'PMTK220,1000')
+# Acquire single GPS position
+gps.update()
+while not gps.has_fix:
+    # Try again if we don't have a fix yet.
+    print('Waiting for fix...')
+    gps.update()
+    break
 
-recv = ''
-print('Sending message to cloud: ' + str(fake_data))
-if USE_NOVA == 0:
-    print('Using WiFi to send POST')
-    # req = Request('POST', post_endpoint, json=fake_data)
-    # print(str(req.prepare()))
-    recv = requests.post(post_endpoint, json=fake_data)
-else:
-    print('Using Nova to send POST')
-    # recv = customCloud.sendMessage(str(fake_data))
-    hologram = HologramCloud(dict(),network='cellular')
-    res = hologram.network.connect()
-    print(str(res))
-    recv = requests.post(post_endpoint, json=fake_data)
+# Set the acquired GPS variables
+test_data['timestamp'] = str(datetime.datetime.now())
+test_data['loc']['lat'] = str(gps.latitude)
+test_data['loc']['lon'] = str(gps.longitude)
+test_data['speed'] = str(gps.speed_knots)
+print('Sending message to cloud: ' + str(test_data))
 
+# Send the POST request to the server; should use Nova to send data
+recv = requests.post(post_endpoint, json=test_data)
 print('Response from Cloud: ' + str(recv) + '.')
