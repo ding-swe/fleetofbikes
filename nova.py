@@ -2,8 +2,6 @@ import requests
 import logging
 import datetime
 import subprocess
-from Exceptions.HologramError import HologramError
-from Hologram.HologramCloud import HologramCloud
 import adafruit_gps
 import board
 import RPi.GPIO as GPIO
@@ -22,7 +20,7 @@ logging.basicConfig(filename='nova_py.log', level=logging.DEBUG)
 
 # Establish a PPP connection on the Pi if it is not already established
 print('Establishing PPP connection')
-subprocess.run('sudo', 'python', 'nova_estab_ppp.py')
+subprocess.run(['sudo', 'python', 'nova_estab_ppp.py'])
 # Start UART communication with GPS module
 uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=3000)
 # Create a GPS module instance.
