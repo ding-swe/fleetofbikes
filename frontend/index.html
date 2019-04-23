@@ -120,6 +120,20 @@
             }
           ]
         });
+
+        var small_icon = {
+		    url: "blue.png", // url
+		    scaledSize: new google.maps.Size(25, 25), // scaled size
+		    origin: new google.maps.Point(0,0), // origin
+		    anchor: new google.maps.Point(0, 0) // anchor
+		};
+
+        // https://developers.google.com/maps/documentation/javascript/custom-markers 
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(38.991629, -76.937606),
+            icon: small_icon,
+            map: map
+          });
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGLTj7eP0NLgDy62iNaDoBAaZXE0iF60U&callback=initMap"
@@ -145,8 +159,13 @@
 					<a href="#">Overview</a>
 				</li>
 				<li>
-					<a href="#">Events</a>
+					<a href="#">History</a>
 				</li>
+
+				<li class = "boof" >
+					<a href="#">Boof</a>
+				</li>
+
 				</ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -164,6 +183,41 @@
 	<!-- Bootstrap Core JavaScript -->
 	<script src="js/bootstrap.min.js"></script>
 
+	<script> 
+		/*var js = $.ajax({type: "GET", url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/testPoint", async: false}).responseText;
+		
+		console.log(js)
+
+		$('.boof a').html(js); */
+
+		/* $.getJSON( "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/testPoint", function( data ) {
+				
+				var loc = data.drew.loc.lat
+
+				//var testParam = $.param(data)
+				//var stringify = JSON.stringify(data)
+				//console.log(testParam)
+				//console.log(stringify)
+
+				console.log(loc)
+				$('.boof a').html("<b><i>" + loc + "</b></i> "); 		
+		}); */ 
+
+		var data = $.ajax({
+					    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/testPoint",
+					    async: false,
+					    dataType: 'json'
+					}).responseJSON.drew.loc.lat;
+
+		console.log(data)
+
+		
+	</script>
+		
+	<script>
+		$('.boof a').html("<b><i>" + data + "</b></i> "); 		
+	</script>
+
 	<!-- Menu Toggle Script "#menu-toggle" -->
 	<script>
 		$(".sidebar-brand").click(function(e) {
@@ -171,10 +225,7 @@
 			$("#wrapper").toggleClass("toggled");
 			$(".sidebar-brand").toggleClass("toggled");
 		});
-		
-		
-		
-		
+				
 		document.getElementById("input").addEventListener("keydown", function(e) {
 			if (!e) { var e = window.event; }
 			//e.preventDefault(); // sometimes useful
