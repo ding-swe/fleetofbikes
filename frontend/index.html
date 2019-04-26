@@ -45,99 +45,110 @@
   <body>
   	<div id="map"></div>
     <script>
-      function initMap() {
-        // Styles a map in night mode.
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 38.992103, lng: -76.937625},
-          zoom: 16,
-          styles: [
-            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-            {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'},{visibility: 'off'}]
-            },
-            {
-              featureType: 'poi',
-              stylers: [{visibility: 'off'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry',
-              stylers: [{color: '#38414e'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#212a37'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#9ca5b3'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry',
-              stylers: [{color: '#746855'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#1f2835'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#f3d19c'}]
-            },
-            {
-              featureType: 'transit',
-              elementType: 'geometry',
-              stylers: [{color: '#2f3948'}]
-            },
-            {
-              featureType: 'transit.station',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{color: '#17263c'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#515c6d'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#17263c'}]
-            }
-          ]
-        });
+    	var marker
 
-        var small_icon = {
-		    url: "blue.png", // url
-		    scaledSize: new google.maps.Size(25, 25), // scaled size
-		    origin: new google.maps.Point(0,0), // origin
-		    anchor: new google.maps.Point(0, 0) // anchor
-		};
+      	function initMap() {
+	        // Styles a map in night mode. 
 
-        // https://developers.google.com/maps/documentation/javascript/custom-markers 
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(38.991629, -76.937606),
-            icon: small_icon,
-            map: map
-          });
-      }
+	        var map = new google.maps.Map(document.getElementById('map'), {
+		          center: {lat: 38.992103, lng: -76.937625},
+		          zoom: 16,
+		          minZoom: 12,
+		          maxZoom: 17,
+		         
+		          styles: [
+		            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+		            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+		            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+		            {
+		              featureType: 'administrative.locality',
+		              elementType: 'labels.text.fill',
+		              stylers: [{color: '#d59563'},{visibility: 'off'}]
+		            },
+		            {
+		              featureType: 'poi',
+		              stylers: [{visibility: 'off'}]
+		            },
+		            {
+		              featureType: 'road',
+		              elementType: 'geometry',
+		              stylers: [{color: '#38414e'}]
+		            },
+		            {
+		              featureType: 'road',
+		              elementType: 'geometry.stroke',
+		              stylers: [{color: '#212a37'}]
+		            },
+		            {
+		              featureType: 'road',
+		              elementType: 'labels.text.fill',
+		              stylers: [{color: '#9ca5b3'}]
+		            },
+		            {
+		              featureType: 'road.highway',
+		              elementType: 'geometry',
+		              stylers: [{color: '#746855'}]
+		            },
+		            {
+		              featureType: 'road.highway',
+		              elementType: 'geometry.stroke',
+		              stylers: [{color: '#1f2835'}]
+		            },
+		            {
+		              featureType: 'road.highway',
+		              elementType: 'labels.text.fill',
+		              stylers: [{color: '#f3d19c'}]
+		            },
+		            {
+		              featureType: 'transit',
+		              elementType: 'geometry',
+		              stylers: [{color: '#2f3948'}]
+		            },
+		            {
+		              featureType: 'transit.station',
+		              elementType: 'labels.text.fill',
+		              stylers: [{color: '#d59563'}]
+		            },
+		            {
+		              featureType: 'water',
+		              elementType: 'geometry',
+		              stylers: [{color: '#17263c'}]
+		            },
+		            {
+		              featureType: 'water',
+		              elementType: 'labels.text.fill',
+		              stylers: [{color: '#515c6d'}]
+		            },
+		            {
+		              featureType: 'water',
+		              elementType: 'labels.text.stroke',
+		              stylers: [{color: '#17263c'}]
+		            }, 
+		            {
+		              featureType: 'water',
+		              elementType: 'labels.text.fill',
+		              stylers: [{color: '#515c6d'}]
+		            }
+		          ]
+	        });
+
+	        var small_icon = {
+			    url: "blue.png", // url
+			    scaledSize: new google.maps.Size(25, 25), // scaled size
+			    origin: new google.maps.Point(0,0), // origin
+			    anchor: new google.maps.Point(0, 0) // anchor
+			};
+
+	        // https://developers.google.com/maps/documentation/javascript/custom-markers 
+	        marker = new google.maps.Marker({
+	            position: new google.maps.LatLng(0, 0),
+	            icon: small_icon,
+	            map: map
+	          });
+    	}
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGLTj7eP0NLgDy62iNaDoBAaZXE0iF60U&callback=initMap"
-    async defer></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGLTj7eP0NLgDy62iNaDoBAaZXE0iF60U&callback=initMap"></script>
 
     <div id="wrapper">
         <!-- Sidebar -->
@@ -184,39 +195,54 @@
 	<script src="js/bootstrap.min.js"></script>
 
 	<script> 
-		/*var js = $.ajax({type: "GET", url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/testPoint", async: false}).responseText;
-		
-		console.log(js)
+			var num = 13; 
 
-		$('.boof a').html(js); */
+			var data = $.ajax({
+			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
+			    async: false,
+			    dataType: 'json'
+			}).responseJSON
+					
+			var lat = $.ajax({
+			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
+			    async: false,
+			    dataType: 'json'
+			}).responseJSON[num].lat
 
-		/* $.getJSON( "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/testPoint", function( data ) {
-				
-				var loc = data.drew.loc.lat
-
-				//var testParam = $.param(data)
-				//var stringify = JSON.stringify(data)
-				//console.log(testParam)
-				//console.log(stringify)
-
-				console.log(loc)
-				$('.boof a').html("<b><i>" + loc + "</b></i> "); 		
-		}); */ 
-
-		var data = $.ajax({
-					    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/testPoint",
-					    async: false,
-					    dataType: 'json'
-					}).responseJSON.drew.loc.lat;
+			var lon = $.ajax({
+			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
+			    async: false,
+			    dataType: 'json'
+			}).responseJSON[num].lon
 
 		console.log(data)
+		console.log(lat)
+		console.log(lon)
 
-		
+   		while(1){
+   			lat = $.ajax({
+			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
+			    async: false,
+			    dataType: 'json'
+			}).responseJSON[num].lat
+
+   			lon = $.ajax({
+			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
+			    async: false,
+			    dataType: 'json'
+			}).responseJSON[num].lon
+
+   			marker.setPosition({lat: Number(lat), lng: Number(lon)})
+   			sleep(500) 
+   		}
 	</script>
 		
 	<script>
-		$('.boof a').html("<b><i>" + data + "</b></i> "); 		
+ 		// https://developers.google.com/maps/documentation/javascript/custom-markers 
+		$('.boof a').html("<b><i>" + lat + "</b></i> "); 		
 	</script>
+
+
 
 	<!-- Menu Toggle Script "#menu-toggle" -->
 	<script>
