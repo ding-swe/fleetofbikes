@@ -1,264 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+  	<head>
+	    <title>Fleet of Bikes</title>
+	    <meta charset="utf-8">
+    	
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
+    	<style>
+		      #mapid {
+		        height: 100%;
+		        width: 100%;
+		      }
 
-  <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-	<style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-    	#map {
-        height: 100%;
-     	 }
-
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      #wrapper { position: absolute; top: 0px; left: 10px; z-index: 99; }
-
-    </style>
-    <title>ENEE408R</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  </head>
-
-  <body>
-  	<div id="map"></div>
-    <script>
-    	var marker
-
-      	function initMap() {
-	        // Styles a map in night mode. 
-
-	        var map = new google.maps.Map(document.getElementById('map'), {
-		          center: {lat: 38.992103, lng: -76.937625},
-		          zoom: 16,
-		          minZoom: 12,
-		          maxZoom: 17,
-		         
-		          styles: [
-		            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-		            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-		            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-		            {
-		              featureType: 'administrative.locality',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#d59563'},{visibility: 'off'}]
-		            },
-		            {
-		              featureType: 'poi',
-		              stylers: [{visibility: 'off'}]
-		            },
-		            {
-		              featureType: 'road',
-		              elementType: 'geometry',
-		              stylers: [{color: '#38414e'}]
-		            },
-		            {
-		              featureType: 'road',
-		              elementType: 'geometry.stroke',
-		              stylers: [{color: '#212a37'}]
-		            },
-		            {
-		              featureType: 'road',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#9ca5b3'}]
-		            },
-		            {
-		              featureType: 'road.highway',
-		              elementType: 'geometry',
-		              stylers: [{color: '#746855'}]
-		            },
-		            {
-		              featureType: 'road.highway',
-		              elementType: 'geometry.stroke',
-		              stylers: [{color: '#1f2835'}]
-		            },
-		            {
-		              featureType: 'road.highway',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#f3d19c'}]
-		            },
-		            {
-		              featureType: 'transit',
-		              elementType: 'geometry',
-		              stylers: [{color: '#2f3948'}]
-		            },
-		            {
-		              featureType: 'transit.station',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#d59563'}]
-		            },
-		            {
-		              featureType: 'water',
-		              elementType: 'geometry',
-		              stylers: [{color: '#17263c'}]
-		            },
-		            {
-		              featureType: 'water',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#515c6d'}]
-		            },
-		            {
-		              featureType: 'water',
-		              elementType: 'labels.text.stroke',
-		              stylers: [{color: '#17263c'}]
-		            }, 
-		            {
-		              featureType: 'water',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#515c6d'}]
-		            }
-		          ]
-	        });
-
-	        var small_icon = {
-			    url: "blue.png", // url
-			    scaledSize: new google.maps.Size(25, 25), // scaled size
-			    origin: new google.maps.Point(0,0), // origin
-			    anchor: new google.maps.Point(0, 0) // anchor
-			};
-
-	        // https://developers.google.com/maps/documentation/javascript/custom-markers 
-	        marker = new google.maps.Marker({
-	            position: new google.maps.LatLng(0, 0),
-	            icon: small_icon,
-	            map: map
-	          });
-    	}
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGLTj7eP0NLgDy62iNaDoBAaZXE0iF60U&callback=initMap"></script>
-
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class= "sidebar-nav">
-                <li class="sidebar-brand">
-                        <img id=menu src="menu.png" alt="menu" style="z-index:10; width: 10%; text-align:left;">
-                    
-                </li>
-				<li>
-					<table style="width: 100%;"><row><td  style = "width:30%;"><a href="#">Search</a></td>
-						<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
-						</td></row></table>
-				</li>
-				<li>
-					<a href="#">Filter</a>
-				</li>
-				<li>
-					<a href="#">Overview</a>
-				</li>
-				<li>
-					<a href="#">History</a>
-				</li>
-
-				<li class = "boof" >
-					<a href="#">Boof</a>
-				</li>
-
+			
+		    /* Optional: Makes the sample page fill the window. */ 
+		    html, body {
+		    	height: 100%;
+		        margin: 0;
+		        padding: 0;
+		    }
+   		</style>
+   		<!-- Bootstrap Core CSS -->
+   		<link href="css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Custom CSS -->
+	    <link href="css/simple-sidebar.css" rel="stylesheet">
+	   
+	    <!-- jQuery -->
+		<script src="js/jquery.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="js/bootstrap.min.js"></script>
+			  	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+ 	 </head>
+  
+  	<body>
+  		
+  		<div id="wrapper">
+	        <!-- Sidebar -->
+	        <div id="sidebar-wrapper">
+	            <ul class= "sidebar-nav">
+	                <li class="sidebar-brand">
+	                        <img id=menu src="menu.png" alt="menu" style="z-index:10; width: 10%; text-align:left;">  
+	                </li>
+					<li>
+						<table style="width: 100%;"><row>
+							<td  style = "width:30%;"><a href="#">Search</a></td>
+							<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
+							</td></row>
+						</table>
+					</li>
+					<li>
+						<a href="#">Filter</a>
+					</li>
+					<li>
+						<a href="#">Overview</a>
+					</li>
+					<li>
+						<a href="#">History</a>
+					</li>
+					<li class = "boof" >
+						<a href="#">Boof</a>
+					</li>
 				</ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+	        </div>
+	        <!-- /#sidebar-wrapper -->
+	        <!-- Page Content -->
+			<!-- /#page-content-wrapper -->
+		</div>
 
-        <!-- Page Content -->
-      
-		<!-- /#page-content-wrapper -->
-	</div>
-	
-	<!-- /#wrapper -->
+		<div id="mapid"></div>
+	 	
+    	<script>
+    			var bikes = [];
+		    	var map = L.map('mapid').setView([38.992103, -76.937625], 18);
 
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
+		        L.tileLayer('https://api.mapbox.com/styles/v1/ebding/cjv333g3y7s2z1fmz1yrwmhiw/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {
+				    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+				    maxZoom: 18,
+				    minZoom: 17,
+				    accessToken: 'pk.eyJ1IjoiZWJkaW5nIiwiYSI6ImNqdjJ5dm5rbTJhMWU0ZXNkZG9jbjRxYnMifQ.ZjX-s9GZcPhjCzW6rUNCqg'
+				}).addTo(map);
 
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+				var icon = L.icon({
+				    iconUrl: 'marker-icon.png',
+				    shadowUrl: 'marker-icon.png',
+				    iconSize:     [15, 15], // size of the icon
+				    shadowSize:   [0, 0], // size of the shadow
+				});
 
-	<script> 
-			var num = 13; 
+				var marker = new L.Marker([38.992102, -76.937626], {icon : icon}).addTo(map);
+				bikes.push(marker)
+				marker = new L.Marker([38.993, -76.938], {icon : icon}).addTo(map);
+				bikes.push(marker)
+				marker = new L.Marker([38.991, -76.936], {icon : icon}).addTo(map);
+				bikes.push(marker)
 
-			var data = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON
+
+				function sleep(ms) {
+	 				return new Promise(resolve => setTimeout(resolve, ms));
+				}
+
+				i = 0; 
+				async function loop() {
+					 while(true){
+			   			
+
+			   			marker.setPosition({lat: Number(lat), lng: Number(lon)})
+			   			console.log({lat: Number(lat), lng: Number(lon)})
+			   			await sleep(1000) 
+			   		}
+				}
+
+    	</script>
+  
+  		<!-- Menu Toggle Script "#menu-toggle" -->
+		<script>
+			$(".sidebar-brand").click(function(e) {
+				e.preventDefault();
+				$("#wrapper").toggleClass("toggled");
+				$(".sidebar-brand").toggleClass("toggled");
+			});
 					
-			var lat = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON[num].lat
-
-			var lon = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON[num].lon
-
-		console.log(data)
-		console.log(lat)
-		console.log(lon)
-
-   		while(1){
-   			lat = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON[num].lat
-
-   			lon = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON[num].lon
-
-   			marker.setPosition({lat: Number(lat), lng: Number(lon)})
-   			sleep(500) 
-   		}
-	</script>
-		
-	<script>
- 		// https://developers.google.com/maps/documentation/javascript/custom-markers 
-		$('.boof a').html("<b><i>" + lat + "</b></i> "); 		
-	</script>
-
-
-
-	<!-- Menu Toggle Script "#menu-toggle" -->
-	<script>
-		$(".sidebar-brand").click(function(e) {
-			e.preventDefault();
-			$("#wrapper").toggleClass("toggled");
-			$(".sidebar-brand").toggleClass("toggled");
-		});
-				
-		document.getElementById("input").addEventListener("keydown", function(e) {
-			if (!e) { var e = window.event; }
-			//e.preventDefault(); // sometimes useful
-			// Enter is pressed
-			if (e.keyCode == 13) {alert(document.getElementById("input").value); }
-		}, false) 
-	</script>
-
-</body>
+			document.getElementById("input").addEventListener("keydown", function(e) {
+				if (!e) { var e = window.event; }
+				if (e.keyCode == 13) {alert(document.getElementById("input").value); }
+			}, false) 
+		</script>
+  	</body>
 </html>
