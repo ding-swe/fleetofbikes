@@ -3,11 +3,11 @@
 # and other details.
 import time
 import board
-import subprocess
-from request import Request
+# import subprocess
+# from request import Request
 import RPi.GPIO as GPIO
-from Exceptions.HologramError import HologramError
-from Hologram.CustomCloud import CustomCloud
+# from Exceptions.HologramError import HologramError
+# from Hologram.CustomCloud import CustomCloud
 #import busio
 
 import adafruit_gps
@@ -70,12 +70,12 @@ gps.send_command(b'PMTK220,1000')
 # Main loop runs forever printing the location, etc. every second.
 do_send = 1
 
-customCloud = CustomCloud(None,
-                          send_host=post_endpoint,
-                          send_port=post_port,
-                          receive_host=get_endpoint,
-                          receive_port=get_port,
-                          enable_inbound=True)
+# customCloud = CustomCloud(None,
+#                           send_host=post_endpoint,
+#                           send_port=post_port,
+#                           receive_host=get_endpoint,
+#                           receive_port=get_port,
+#                           enable_inbound=True)
 
 time_curr = time.monotonic()
 time_gps = time_curr
@@ -137,11 +137,11 @@ while True:
                 print('Horizontal dilution: {}'.format(gps.horizontal_dilution))
             if gps.height_geoid is not None:
                 print('Height geo ID: {} meters'.format(gps.height_geoid))
-            do_send = 0
+            # do_send = 0
             gps_data += '\"'
             # subprocess.run(['sudo', 'hologram', 'connect'])
             # subprocess.run(['sudo', 'hologram', 'send', gps_data])
-            payload = {'Latitude': '{}'.format(gps.latitude), 'Longitude': '{}'.format(gps.longitude)}
-            req = Request('Post', post_endpoint, data=payload, headers=post_header)
-            print(req.text)
-    if time_curr - time_recv >= RECV_PERIOD:
+    #         payload = {'Latitude': '{}'.format(gps.latitude), 'Longitude': '{}'.format(gps.longitude)}
+    #         req = Request('Post', post_endpoint, data=payload, headers=post_header)
+    #         print(req.text)
+    # if time_curr - time_recv >= RECV_PERIOD:
