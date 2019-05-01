@@ -8,7 +8,7 @@ import threading
 loc_period = 2 #10 seconds between sending GPS coords
 info_period = 60 #60 seconds between sending health status
 
-num_bikes = 1
+num_bikes = 3
 
 MAX_SPEED = 20
 MIN_LAT = 38.979522
