@@ -11,11 +11,11 @@
 		        width: 100%;
 		      }
 
-		      #update_toggle{
+		      #update-toggle{
 		      	background: green;
 		      }
 
-		      #error_log{
+		      #error-log{
 		      	background: #33A7FF;
 		      }
 			
@@ -55,16 +55,22 @@
 							</td></row>
 						</table>
 					</li>
-					<li>
-						<a href="#">Filter</a>
+					<li id = "search-result">
+						<a href="#">Search Result</a>
 					</li>
-					<li>
-						<a href="#">Overview</a>
+					<button class="accordion">
+						<a href="#">Bike Fleet List </a>
+					</button>
+					<li class="panel">
+ 						<p> Bike1 </p>
+ 						<p> Bike2 </p>
+ 						<p> Bike3 </p>
+ 						<p> Bike4 </p>
 					</li>
-					<li class = "update_toggle" id = "update_toggle">
+					<li class = "update-toggle" id = "update-toggle">
 						<a href="#">Start Running</a>
 					</li>
-					<li class = "error_log" id = "error_log" >
+					<li class = "error-log" id = "error-log" >
 						<a href="#">Error log OK</a>
 					</li>
 				</ul>
@@ -121,14 +127,14 @@
 										    dataType: 'json',
 
 										    success: function(data, status, xhr){
-										    		$('.error_log a').html("Error log OK")	
-													$('.error_log a').css('background', "#33A7FF")
+										    		$('.error-log a').html("Error log OK")	
+													$('.error-log a').css('background', "#33A7FF")
 										    },
 
 										    error: function(xhr, status,error){
 										    		console.log("problem")
-								   					$('.error_log a').html("responseJSON not received from server")	
-													$('.error_log a').css('background', "red")
+								   					$('.error-log a').html("responseJSON not received from server")	
+													$('.error-log a').css('background', "red")
 										    }
 										}).responseJSON
 
@@ -161,23 +167,54 @@
 				$(".sidebar-brand").toggleClass("toggled");
 			});
 
-			$(".update_toggle").click(function(e) {
+			$(".update-toggle").click(function(e) {
 				if(updating_locations){
 					updating_locations = false;
-					$('.update_toggle a').html("Press to START UPDATING")
-					$('.update_toggle a').css('background', "green")
+					$('.update-toggle a').html("Press to START UPDATING")
+					$('.update-toggle a').css('background', "green")
 				}
 				else{
 					updating_locations = true; 
-					$('.update_toggle a').html("Press to STOP UPDATING")	
-					$('.update_toggle a').css('background', "red")
+					$('.update-toggle a').html("Press to STOP UPDATING")	
+					$('.update-toggle a').css('background', "red")
 				}
 			});
 					
 			document.getElementById("input").addEventListener("keydown", function(e) {
 				if (!e) { var e = window.event; }
-				if (e.keyCode == 13) {alert(document.getElementById("input").value); }
+				if (e.keyCode == 13) {
+					var inputVal = document.getElementById("input").value;
+					if(bikes[inputVal] == undefined){
+						$('#search-result a').html("N/A : Bike not found")	
+					} else{
+						var recLongLat = bikes[inputVal].getLatLng();
+						$('#search-result a').html("Lat : " + recLongLat.lat + " Long : " + recLongLat.lng)	
+						map.setZoom(16);
+						map.panTo(recLongLat)				
+					}
+				}
 			}, false) 
+
+
+		</script>
+
+		<script>
+			var acc = document.getElementsByClassName("accordion");
+			var i;
+
+			$(".accordion").click( function() {
+				  	  /* Toggle between adding and removing the "active" class,
+				    to highlight the button that controls the panel */
+				    this.classList.toggle("active");
+
+				    /* Toggle between hiding and showing the active panel */
+				    var panel = this.nextElementSibling;
+				    if (panel.style.display === "block") {
+				      panel.style.display = "none";
+				    } else {
+				      panel.style.display = "block";
+				    }
+			});
 		</script>
   	</body>
 </html>
