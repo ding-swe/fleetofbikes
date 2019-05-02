@@ -81,13 +81,18 @@
     			var updating_locations = false; 
     			var all_locs; 
 
+    			/* scrapped bounds code
+    			var southWest = L.latLng(38.960324, -76.977949),
+				northEast = L.latLng(39.011634, -76.893137),
+				bounds = L.latLngBounds(southWest, northEast); , {maxBounds:bounds}*/
+
     			// configuring LeafletJS map
 		    	var map = L.map('mapid').setView([38.992103, -76.937625], 18);
 
 		        L.tileLayer('https://api.mapbox.com/styles/v1/ebding/cjv333g3y7s2z1fmz1yrwmhiw/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {
 				    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 				    maxZoom: 18,
-				    minZoom: 13,
+				    minZoom: 14,
 				    accessToken: 'pk.eyJ1IjoiZWJkaW5nIiwiYSI6ImNqdjJ5dm5rbTJhMWU0ZXNkZG9jbjRxYnMifQ.ZjX-s9GZcPhjCzW6rUNCqg'
 				}).addTo(map);
 
