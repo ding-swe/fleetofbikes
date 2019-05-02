@@ -16,7 +16,7 @@
 		      }
 
 		      #error-log{
-		      	background: #33A7FF;
+		      	background: #000;
 		      }
 			
 		    /* Optional: Makes the sample page fill the window. */ 
@@ -128,7 +128,7 @@
 
 										    success: function(data, status, xhr){
 										    		$('.error-log a').html("Error log OK")	
-													$('.error-log a').css('background', "#33A7FF")
+													$('.error-log a').css('background', "#000")
 										    },
 
 										    error: function(xhr, status,error){
@@ -137,10 +137,6 @@
 													$('.error-log a').css('background', "red")
 										    }
 										}).responseJSON
-
-			   				
-
-			   				
 
 			   				for(i = 0; i < all_locs.length; i++){
 			   					bike = all_locs[i]
@@ -190,7 +186,7 @@
 						var recLongLat = bikes[inputVal].getLatLng();
 						$('#search-result a').html("Lat : " + recLongLat.lat + " Long : " + recLongLat.lng)	
 						map.setZoom(16);
-						map.panTo(recLongLat)				
+						map.panTo(recLongLat)
 					}
 				}
 			}, false) 
@@ -199,9 +195,6 @@
 		</script>
 
 		<script>
-			var acc = document.getElementsByClassName("accordion");
-			var i;
-
 			$(".accordion").click( function() {
 				  	  /* Toggle between adding and removing the "active" class,
 				    to highlight the button that controls the panel */
