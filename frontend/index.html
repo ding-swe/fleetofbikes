@@ -30,6 +30,7 @@
    		<link href="css/bootstrap.min.css" rel="stylesheet">
 	    <!-- Custom CSS -->
 	    <link href="css/simple-sidebar.css" rel="stylesheet">
+	    <link href="css/overlay.css" rel="stylesheet">
 	   
 	    <!-- jQuery -->
 		<script src="js/jquery.js"></script>
@@ -41,23 +42,44 @@
   
   	<body>
   		
-  		<div id="wrapper">
+  		<div id="myNav" class="overlay">
+		  	<!-- Button to close the overlay navigation -->
+		  	<a href="#" class="closebtn">&times;</a>
+
+		  	<!-- Overlay content -->
+		  	<div class="overlay-content">
+			    <a href="#">Important Dashboard</a>
+			    <a href="#">Critical Information Would Be Shown Here</a>
+			    <a href="#">Important Statistics and Facts</a>
+			    <a href="#">Graphics, Maps, Routes, and Charts</a>
+		  	</div>
+		</div>
+
+  		<div class = "toggled"  id="wrapper">
 	        <!-- Sidebar -->
 	        <div id="sidebar-wrapper">
 	            <ul class= "sidebar-nav">
-	                <li class="sidebar-brand">
+	                <li class="sidebar-brand toggled">
 	                        <img id=menu src="menu.png" alt="menu" style="z-index:10; width: 10%; text-align:left;">  
 	                </li>
+	                 <li class = "show-dashboard">
+						<a href="#" >Show Dashboard</a>
+					</li>
 					<li>
-						<table style="width: 100%;"><row>
-							<td  style = "width:30%;"><a href="#">Search</a></td>
-							<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
-							</td></row>
+						<table style="width: 100%;">
+							<row>
+								<!-- <img src="search.png" class="img showing"></img> blocked out image replacing text on side--> 
+								<td  style = "width:30%;"><a href="#"> Search</a></td>
+								<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
+								</td>
+							</row>
 						</table>
 					</li>
+
 					<li id = "search-result">
 						<a href="#">Search Result</a>
 					</li>
+
 					<button class="accordion">
 						<a href="#">Bike Fleet List </a>
 					</button>
@@ -73,6 +95,7 @@
 					<li class = "error-log" id = "error-log" >
 						<a href="#">Error log OK</a>
 					</li>
+					
 				</ul>
 	        </div>
 	        <!-- /#sidebar-wrapper -->
@@ -81,7 +104,7 @@
 		</div>
 
 		<div id="mapid"></div>
-	 	
+	 
     	<script>
     			var bikes = {};
     			var updating_locations = false; 
@@ -161,6 +184,8 @@
 				e.preventDefault();
 				$("#wrapper").toggleClass("toggled");
 				$(".sidebar-brand").toggleClass("toggled");
+
+				$(".img").toggleClass("showing");
 			});
 
 			$(".update-toggle").click(function(e) {
@@ -208,6 +233,17 @@
 				      panel.style.display = "block";
 				    }
 			});
+		</script>
+
+		<script>
+			$(".show-dashboard").click(function(){
+				document.getElementById("myNav").style.display = "block";
+				console.log("clicked enlarge")
+			})
+
+			$(".closebtn").click(function(){
+				document.getElementById("myNav").style.display = "none";
+			})
 		</script>
   	</body>
 </html>
