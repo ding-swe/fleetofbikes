@@ -36,7 +36,7 @@
 		<script src="js/jquery.js"></script>
 		<!-- Bootstrap Core JavaScript -->
 		<script src="js/bootstrap.min.js"></script>
-			  	<!-- Make sure you put this AFTER Leaflet's CSS -->
+		<!-- Make sure you put this AFTER Leaflet's CSS -->
 	 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
  	 </head>
   
@@ -62,33 +62,67 @@
 	                <li class="sidebar-brand toggled">
 	                        <img id=menu src="menu.png" alt="menu" style="z-index:10; width: 10%; text-align:left;">  
 	                </li>
-	                 <li class = "show-dashboard">
-						<a href="#" >Show Dashboard</a>
-					</li>
-					<li>
+	                <li class = "show-dashboard">
 						<table style="width: 100%;">
 							<row>
-								<!-- <img src="search.png" class="img showing"></img> blocked out image replacing text on side--> 
-								<td  style = "width:30%;"><a href="#"> Search</a></td>
-								<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
+								<!--  blocked out image replacing text on side--> 
+								<td class="hidden-search showing">
+									<img src="dashboard.png" class ="sidebar-img"></img>
+								</td>
+								<td class="hidden-search">
+									<a href="#" style="width: 100%"> 
+										Show Dashboard
+									</a>
 								</td>
 							</row>
 						</table>
 					</li>
 
-					<li id = "search-result">
-						<a href="#">Search Result</a>
+					<li>
+						<table style="width: 100%;">
+							<row>
+								<!--  blocked out image replacing text on side--> 
+								<td class="hidden-search showing">
+									<img src="search.png" class ="sidebar-img"></img>
+								</td>
+								<td class="hidden-search">
+									<a href="#" style="width: 100%"> 
+										Search
+										<input id = "input" type="Search" name="fname" style = "height: 30px; width: 60%; margin-left: 20px; color: black">
+									</a>
+								</td>
+							</row>
+						</table>
 					</li>
+					<!--
+					<li id = "search-result" class="hidden-search">
+						<a href="#">Search Result</a>
+					</li> 
+
+					<li>
+						<table style="width: 100%;">
+							<row>
+								<td class="hidden-search showing">
+									<img src="search.png" class ="sidebar-img"></img>
+								</td>
+								<button class="accordian hidden-search">
+									<a href="#">Bike Fleet List </a> </button>
+								</td>
+							</row>
+						</table>
+					</li> -->
 
 					<button class="accordion">
 						<a href="#">Bike Fleet List </a>
 					</button>
+							
 					<li class="panel">
  						<p> Bike1 </p>
  						<p> Bike2 </p>
  						<p> Bike3 </p>
  						<p> Bike4 </p>
 					</li>
+					
 					<li class = "update-toggle" id = "update-toggle">
 						<a href="#">Start Running</a>
 					</li>
@@ -185,7 +219,7 @@
 				$("#wrapper").toggleClass("toggled");
 				$(".sidebar-brand").toggleClass("toggled");
 
-				$(".img").toggleClass("showing");
+				$(".hidden-search").toggleClass("showing");
 			});
 
 			$(".update-toggle").click(function(e) {
@@ -205,12 +239,13 @@
 				if (!e) { var e = window.event; }
 				if (e.keyCode == 13) {
 					var inputVal = document.getElementById("input").value;
+					console.log(inputVal)
 					if(bikes[inputVal] == undefined){
 						$('#search-result a').html("N/A : Bike not found")	
 					} else{
 						var recLongLat = bikes[inputVal].getLatLng();
 						$('#search-result a').html("Lat : " + recLongLat.lat + " Long : " + recLongLat.lng)	
-						map.setZoom(16);
+						map.setZoom(17);
 						map.panTo(recLongLat)
 					}
 				}

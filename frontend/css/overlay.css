@@ -57,12 +57,33 @@
 }
 
 
-.img{
-  text-align: left;
+/*.hidden{
+  text-align: center;
+  padding: 5px;
+  display: none;
+  max-height: 40px;
+  width: 0%;
+}
+
+.hidden.showing{
+  text-align: center;
+  display: inline-block;
+  max-height: 3px;
+  width: 80%;
+}*/
+
+.hidden-search{
+  height: 100%;
   display: none;
 }
 
-.img.showing{
-  display: inline-grid;
-  max-height: 40px;
+.hidden-search.showing{
+  height: 100%;
+  display: inline;
+}
+
+.sidebar-img{
+  height: 35px;
+  display: inline-block;
+  text-align: center;
 }
