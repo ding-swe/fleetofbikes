@@ -1,264 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+  	<head>
+	    <title>Fleet of Bikes</title>
+	    <meta charset="utf-8">
+    	
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"/>
+    	<style>
+		      #mapid {
+		        height: 100%;
+		        width: 100%;
+		      }
 
-  <head>
+		      #update-toggle{
+		      	background: green;
+		      }
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-	<style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-    	#map {
-        height: 100%;
-     	 }
+		      #error-log{
+		      	background: #000;
+		      }
+			
+		    /* Optional: Makes the sample page fill the window. */ 
+		    html, body {
+		    	height: 100%;
+		        margin: 0;
+		        padding: 0;
+		    }
+   		</style>
+   		<!-- Bootstrap Core CSS -->
+   		<link href="css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Custom CSS -->
+	    <link href="css/simple-sidebar.css" rel="stylesheet">
+	    <link href="css/overlay.css" rel="stylesheet">
+	   
+	    <!-- jQuery -->
+		<script src="js/jquery.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="js/bootstrap.min.js"></script>
+			  	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+ 	 </head>
+  
+  	<body>
+  		
+  		<div id="myNav" class="overlay">
+		  	<!-- Button to close the overlay navigation -->
+		  	<a href="#" class="closebtn">&times;</a>
 
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+		  	<!-- Overlay content -->
+		  	<div class="overlay-content">
+			    <a href="#">Important Dashboard</a>
+			    <a href="#">Critical Information Would Be Shown Here</a>
+			    <a href="#">Important Statistics and Facts</a>
+			    <a href="#">Graphics, Maps, Routes, and Charts</a>
+		  	</div>
+		</div>
 
-      #wrapper { position: absolute; top: 0px; left: 10px; z-index: 99; }
+  		<div class = "toggled"  id="wrapper">
+	        <!-- Sidebar -->
+	        <div id="sidebar-wrapper">
+	            <ul class= "sidebar-nav">
+	                <li class="sidebar-brand toggled">
+	                        <img id=menu src="menu.png" alt="menu" style="z-index:10; width: 10%; text-align:left;">  
+	                </li>
+	                 <li class = "show-dashboard">
+						<a href="#" >Show Dashboard</a>
+					</li>
+					<li>
+						<table style="width: 100%;">
+							<row>
+								<!-- <img src="search.png" class="img showing"></img> blocked out image replacing text on side--> 
+								<td  style = "width:30%;"><a href="#"> Search</a></td>
+								<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
+								</td>
+							</row>
+						</table>
+					</li>
 
-    </style>
-    <title>ENEE408R</title>
+					<li id = "search-result">
+						<a href="#">Search Result</a>
+					</li>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  </head>
-
-  <body>
-  	<div id="map"></div>
-    <script>
-    	var marker
-
-      	function initMap() {
-	        // Styles a map in night mode. 
-
-	        var map = new google.maps.Map(document.getElementById('map'), {
-		          center: {lat: 38.992103, lng: -76.937625},
-		          zoom: 16,
-		          minZoom: 12,
-		          maxZoom: 17,
-		         
-		          styles: [
-		            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-		            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-		            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-		            {
-		              featureType: 'administrative.locality',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#d59563'},{visibility: 'off'}]
-		            },
-		            {
-		              featureType: 'poi',
-		              stylers: [{visibility: 'off'}]
-		            },
-		            {
-		              featureType: 'road',
-		              elementType: 'geometry',
-		              stylers: [{color: '#38414e'}]
-		            },
-		            {
-		              featureType: 'road',
-		              elementType: 'geometry.stroke',
-		              stylers: [{color: '#212a37'}]
-		            },
-		            {
-		              featureType: 'road',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#9ca5b3'}]
-		            },
-		            {
-		              featureType: 'road.highway',
-		              elementType: 'geometry',
-		              stylers: [{color: '#746855'}]
-		            },
-		            {
-		              featureType: 'road.highway',
-		              elementType: 'geometry.stroke',
-		              stylers: [{color: '#1f2835'}]
-		            },
-		            {
-		              featureType: 'road.highway',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#f3d19c'}]
-		            },
-		            {
-		              featureType: 'transit',
-		              elementType: 'geometry',
-		              stylers: [{color: '#2f3948'}]
-		            },
-		            {
-		              featureType: 'transit.station',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#d59563'}]
-		            },
-		            {
-		              featureType: 'water',
-		              elementType: 'geometry',
-		              stylers: [{color: '#17263c'}]
-		            },
-		            {
-		              featureType: 'water',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#515c6d'}]
-		            },
-		            {
-		              featureType: 'water',
-		              elementType: 'labels.text.stroke',
-		              stylers: [{color: '#17263c'}]
-		            }, 
-		            {
-		              featureType: 'water',
-		              elementType: 'labels.text.fill',
-		              stylers: [{color: '#515c6d'}]
-		            }
-		          ]
-	        });
-
-	        var small_icon = {
-			    url: "blue.png", // url
-			    scaledSize: new google.maps.Size(25, 25), // scaled size
-			    origin: new google.maps.Point(0,0), // origin
-			    anchor: new google.maps.Point(0, 0) // anchor
-			};
-
-	        // https://developers.google.com/maps/documentation/javascript/custom-markers 
-	        marker = new google.maps.Marker({
-	            position: new google.maps.LatLng(0, 0),
-	            icon: small_icon,
-	            map: map
-	          });
-    	}
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGLTj7eP0NLgDy62iNaDoBAaZXE0iF60U&callback=initMap"></script>
-
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class= "sidebar-nav">
-                <li class="sidebar-brand">
-                        <img id=menu src="menu.png" alt="menu" style="z-index:10; width: 10%; text-align:left;">
-                    
-                </li>
-				<li>
-					<table style="width: 100%;"><row><td  style = "width:30%;"><a href="#">Search</a></td>
-						<td style = "width:70%; text-align: left;"> <input id = "input" type="Search" name="fname" style = "height: 30px; width: 150px">
-						</td></row></table>
-				</li>
-				<li>
-					<a href="#">Filter</a>
-				</li>
-				<li>
-					<a href="#">Overview</a>
-				</li>
-				<li>
-					<a href="#">History</a>
-				</li>
-
-				<li class = "boof" >
-					<a href="#">Boof</a>
-				</li>
-
-				</ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-      
-		<!-- /#page-content-wrapper -->
-	</div>
-	
-	<!-- /#wrapper -->
-
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
-
-	<script> 
-			var num = 13; 
-
-			var data = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON
+					<button class="accordion">
+						<a href="#">Bike Fleet List </a>
+					</button>
+					<li class="panel">
+ 						<p> Bike1 </p>
+ 						<p> Bike2 </p>
+ 						<p> Bike3 </p>
+ 						<p> Bike4 </p>
+					</li>
+					<li class = "update-toggle" id = "update-toggle">
+						<a href="#">Start Running</a>
+					</li>
+					<li class = "error-log" id = "error-log" >
+						<a href="#">Error log OK</a>
+					</li>
 					
-			var lat = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON[num].lat
+				</ul>
+	        </div>
+	        <!-- /#sidebar-wrapper -->
+	        <!-- Page Content -->
+			<!-- /#page-content-wrapper -->
+		</div>
 
-			var lon = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON[num].lon
+		<div id="mapid"></div>
+	 
+    	<script>
+    			var bikes = {};
+    			var updating_locations = false; 
+    			var all_locs; 
 
-		console.log(data)
-		console.log(lat)
-		console.log(lon)
+    			/* scrapped bounds code
+    			var southWest = L.latLng(38.960324, -76.977949),
+				northEast = L.latLng(39.011634, -76.893137),
+				bounds = L.latLngBounds(southWest, northEast); , {maxBounds:bounds}*/
 
-   		while(1){
-   			lat = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON[num].lat
+    			// configuring LeafletJS map
+		    	var map = L.map('mapid').setView([38.992103, -76.937625], 18);
 
-   			lon = $.ajax({
-			    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/all",
-			    async: false,
-			    dataType: 'json'
-			}).responseJSON[num].lon
+		        L.tileLayer('https://api.mapbox.com/styles/v1/ebding/cjv333g3y7s2z1fmz1yrwmhiw/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {
+				    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+				    maxZoom: 18,
+				    minZoom: 14,
+				    accessToken: 'pk.eyJ1IjoiZWJkaW5nIiwiYSI6ImNqdjJ5dm5rbTJhMWU0ZXNkZG9jbjRxYnMifQ.ZjX-s9GZcPhjCzW6rUNCqg'
+				}).addTo(map);
 
-   			marker.setPosition({lat: Number(lat), lng: Number(lon)})
-   			sleep(500) 
-   		}
-	</script>
-		
-	<script>
- 		// https://developers.google.com/maps/documentation/javascript/custom-markers 
-		$('.boof a').html("<b><i>" + lat + "</b></i> "); 		
-	</script>
-
-
-
-	<!-- Menu Toggle Script "#menu-toggle" -->
-	<script>
-		$(".sidebar-brand").click(function(e) {
-			e.preventDefault();
-			$("#wrapper").toggleClass("toggled");
-			$(".sidebar-brand").toggleClass("toggled");
-		});
+				var icon = L.icon({
+				    iconUrl: 'marker-icon.png',
+				    shadowUrl: 'marker-icon.png',
+				    iconSize:     [15, 15], // size of the icon
+				    shadowSize:   [0, 0], // size of the shadow
+				});
 				
-		document.getElementById("input").addEventListener("keydown", function(e) {
-			if (!e) { var e = window.event; }
-			//e.preventDefault(); // sometimes useful
-			// Enter is pressed
-			if (e.keyCode == 13) {alert(document.getElementById("input").value); }
-		}, false) 
-	</script>
 
-</body>
+				// begin the map updates 
+				var j = 0; 
+				loop();
+
+				function sleep(ms) {
+	 				return new Promise(resolve => setTimeout(resolve, ms));
+				}
+
+				async function loop() {
+					while(true){					
+			   			if(updating_locations){
+			   					all_locs = $.ajax({
+										    url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/current/all",
+										    async: false,
+										    dataType: 'json',
+
+										    success: function(data, status, xhr){
+										    		$('.error-log a').html("Error log OK")	
+													$('.error-log a').css('background', "#000")
+										    },
+
+										    error: function(xhr, status,error){
+										    		console.log("problem")
+								   					$('.error-log a').html("responseJSON not received from server")	
+													$('.error-log a').css('background', "red")
+										    }
+										}).responseJSON
+
+			   				for(i = 0; i < all_locs.length; i++){
+			   					bike = all_locs[i]
+			   					if(bikes[bike.name] == undefined){
+			   						bikes[bike.name] = new L.Marker([bike.lat, bike.lon], {icon : icon}).addTo(map);
+			   					} else{	// defined, update current marker position 
+			   						bikes[bike.name].setLatLng([bike.lat, bike.lon]).update(); 
+			   					}
+			   				}
+
+			   				j = j + 1;
+			   				console.log(j + "th iteration")
+			   			}
+			   			await sleep(2500) 
+			   		}
+				} 
+    	</script>
+  
+  		<!-- Menu Toggle Script "#menu-toggle" -->
+		<script>
+			$(".sidebar-brand").click(function(e) {
+				e.preventDefault();
+				$("#wrapper").toggleClass("toggled");
+				$(".sidebar-brand").toggleClass("toggled");
+
+				$(".img").toggleClass("showing");
+			});
+
+			$(".update-toggle").click(function(e) {
+				if(updating_locations){
+					updating_locations = false;
+					$('.update-toggle a').html("Press to START UPDATING")
+					$('.update-toggle a').css('background', "green")
+				}
+				else{
+					updating_locations = true; 
+					$('.update-toggle a').html("Press to STOP UPDATING")	
+					$('.update-toggle a').css('background', "red")
+				}
+			});
+					
+			document.getElementById("input").addEventListener("keydown", function(e) {
+				if (!e) { var e = window.event; }
+				if (e.keyCode == 13) {
+					var inputVal = document.getElementById("input").value;
+					if(bikes[inputVal] == undefined){
+						$('#search-result a').html("N/A : Bike not found")	
+					} else{
+						var recLongLat = bikes[inputVal].getLatLng();
+						$('#search-result a').html("Lat : " + recLongLat.lat + " Long : " + recLongLat.lng)	
+						map.setZoom(16);
+						map.panTo(recLongLat)
+					}
+				}
+			}, false) 
+
+
+		</script>
+
+		<script>
+			$(".accordion").click( function() {
+				  	  /* Toggle between adding and removing the "active" class,
+				    to highlight the button that controls the panel */
+				    this.classList.toggle("active");
+
+				    /* Toggle between hiding and showing the active panel */
+				    var panel = this.nextElementSibling;
+				    if (panel.style.display === "block") {
+				      panel.style.display = "none";
+				    } else {
+				      panel.style.display = "block";
+				    }
+			});
+		</script>
+
+		<script>
+			$(".show-dashboard").click(function(){
+				document.getElementById("myNav").style.display = "block";
+				console.log("clicked enlarge")
+			})
+
+			$(".closebtn").click(function(){
+				document.getElementById("myNav").style.display = "none";
+			})
+		</script>
+  	</body>
 </html>
