@@ -55,15 +55,9 @@
 
                     <ul class="nav">
                         <li>
-                            <a href="dashboard.html">
+                            <a href="index.html">
                                 <i class="pe-7s-graph"></i>
                                 <p>Dashboard</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="user.html">
-                                <i class="pe-7s-user"></i>
-                                <p>User Profile</p>
                             </a>
                         </li>
                         <li>
@@ -76,12 +70,6 @@
                             <a href="maps.html">
                                 <i class="pe-7s-map-marker"></i>
                                 <p>Map</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="notifications.html">
-                                <i class="pe-7s-bell"></i>
-                                <p>Notifications</p>
                             </a>
                         </li>
                         <li>
@@ -111,78 +99,18 @@
                         <div>
                             <ul class="nav navbar-nav navbar-left">
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-dashboard"></i>
-                                        <p class="hidden-lg hidden-md">Dashboard</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fa fa-globe"></i>
-                                            <b class="caret hidden-sm hidden-xs"></b>
-
-                                            <span class="notification hidden-sm hidden-xs">5</span>
-
-                                            <p class="hidden-lg hidden-md">
-                                                5 Notifications
-                                                <b class="caret"></b>
-                                            </p>
-                                      </a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="#">Notification 1</a></li>
-                                        <li><a href="#">Notification 2</a></li>
-                                        <li><a href="#">Notification 3</a></li>
-                                        <li><a href="#">Notification 4</a></li>
-                                        <li><a href="#">Another notification</a></li>
-                                      </ul>
-                                </li>
-                                <li>
                                    <a>
                                         <i class="fa fa-search"></i>
                                         <p class="hidden-lg hidden-md">Search</p> 
                                         <input id = "searchbar" class="" type="Search" name="fname" style = "height: 80%; width: 80%; margin-left: 20px; color: gray">
                                     </a>
                                 </li>
-
-                                <!-- 
-                                    
-
-                                    <td class="hidden-search">
-                                        <a href="#" style="width: 100%"> 
-                                            Search
-                                            <input id = "input" type="Search" name="fname" style = "height: 30px; width: 60%; margin-left: 20px; color: black">
-                                        </a>
-                                    </td>
-                                -->
                                 <li>
                                      <a id="run-button" class="pe-7s-angle-right-circle" style="height: 90%;">
                                           RUN
                                      </a>
                                 </li>
                             </ul>
-
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown">
-                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <p>
-                                                Dropdown
-                                                <b class="caret"></b>
-                                            </p>
-
-                                      </a>
-                                      <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                      </ul>
-                                </li>
-                                <li class="separator hidden-lg hidden-md"></li>
-                            </ul>
-                                
                         </div>
                     </div>
                 </nav>
@@ -204,7 +132,6 @@
             var map = L.map('map').setView([38.992103, -76.937625], 18);
 
                 L.tileLayer('https://api.mapbox.com/styles/v1/ebding/cjv9pir8j54st1fqxgi7x5zkg/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
                 minZoom: 14,
                 accessToken: 'pk.eyJ1IjoiZWJkaW5nIiwiYSI6ImNqdjJ5dm5rbTJhMWU0ZXNkZG9jbjRxYnMifQ.ZjX-s9GZcPhjCzW6rUNCqg'
@@ -235,17 +162,8 @@
                                         url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/location/current/all",
                                         async: false,
                                         dataType: 'json',
-
-                                        success: function(data, status, xhr){
-                                                $('.error-log a').html("Error log OK")  
-                                                $('.error-log a').css('background', "#000")
-                                        },
-
-                                        error: function(xhr, status,error){
-                                                console.log("problem")
-                                                $('.error-log a').html("responseJSON not received from server") 
-                                                $('.error-log a').css('background', "red")
-                                        }
+                                        success: function(data, status, xhr){},
+                                        error: function(xhr, status,error){ console.log("problem")}
                                     }).responseJSON
 
                         for(i = 0; i < all_locs.length; i++){

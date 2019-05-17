@@ -197,10 +197,12 @@
 
 			   				for(i = 0; i < all_locs.length; i++){
 			   					bike = all_locs[i]
-			   					if(bikes[bike.name] == undefined){
-			   						bikes[bike.name] = new L.Marker([bike.lat, bike.lon], {icon : icon}).addTo(map);
-			   					} else{	// defined, update current marker position 
-			   						bikes[bike.name].setLatLng([bike.lat, bike.lon]).update(); 
+			   					if(bike != null){
+			   						if(bikes[bike.name] == undefined){
+			   							bikes[bike.name] = new L.Marker([bike.lat, bike.lon], {icon : icon}).addTo(map);
+				   					} else{	// defined, update current marker position 
+				   						bikes[bike.name].setLatLng([bike.lat, bike.lon]).update(); 
+				   					}
 			   					}
 			   				}
 

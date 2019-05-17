@@ -29,6 +29,12 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+
+     <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.js"></script>
 </head>
 <body>
 
@@ -47,15 +53,9 @@
 
             <ul class="nav">
                 <li>
-                    <a href="dashboard.html">
+                    <a href="index.html">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="user.html">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
                     </a>
                 </li>
                 <li class="active">
@@ -67,16 +67,9 @@
                 <li>
                     <a href="maps.html">
                         <i class="pe-7s-map-marker"></i>
-                        <p>Maps</p>
+                        <p>Map</p>
                     </a>
                 </li>
-                <li>
-                    <a href="notifications.html">
-                        <i class="pe-7s-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-
                 <li>
                     <a href="stack.html">
                         <i class="pe-7s-news-paper"></i>
@@ -102,51 +95,10 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-dashboard"></i>
-								<p class="hidden-lg hidden-md">Dashboard</p>
+                            <a id="run-button" class="pe-7s-angle-right-circle" style="height: 90%;">
+                                RUN
                             </a>
                         </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-globe"></i>
-                                    <b class="caret hidden-sm hidden-xs"></b>
-                                    <span class="notification hidden-sm hidden-xs">5</span>
-									<p class="hidden-lg hidden-md">
-										5 Notifications
-										<b class="caret"></b>
-									</p>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <p>
-										Dropdown
-										<b class="caret"></b>
-									</p>
-
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                              </ul>
-                        </li>
-						<li class="separator hidden-lg hidden-md"></li>
                     </ul>
                 </div>
             </div>
@@ -159,61 +111,40 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Bikes with Some Feature Filter</h4>
-                                <p class="category">Here is a subtitle for this table</p>
+                                <div class="category">
+                                    <div class = "dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <p style="color: gray">
+                                                Bike Filter Options
+                                                <b class="caret"></b>
+                                            </p>
+                                        </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">Separated link</a></li>
+                                            </ul>
+                                        </li>
+                                    </div>
+                                </div>
                             </div>
+
+                            
+
+
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <th>ID</th>
-                                    	<th>Name</th>
-                                    	<th>Salary</th>
-                                    	<th>Country</th>
-                                    	<th>City</th>
+                                        <th>Bike Name</th>
+                                    	<th>ID</th>
+                                    	<th>Flag</th>
+                                    	<th>Message</th>
+                                    	<!-- <th></th> --> 
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                        	<td>1</td>
-                                        	<td>Dakota Rice</td>
-                                        	<td>$36,738</td>
-                                        	<td>Niger</td>
-                                        	<td>Oud-Turnhout</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>2</td>
-                                        	<td>Minerva Hooper</td>
-                                        	<td>$23,789</td>
-                                        	<td>Curaçao</td>
-                                        	<td>Sinaai-Waas</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>3</td>
-                                        	<td>Sage Rodriguez</td>
-                                        	<td>$56,142</td>
-                                        	<td>Netherlands</td>
-                                        	<td>Baileux</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>4</td>
-                                        	<td>Philip Chaney</td>
-                                        	<td>$38,735</td>
-                                        	<td>Korea, South</td>
-                                        	<td>Overland Park</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>5</td>
-                                        	<td>Doris Greene</td>
-                                        	<td>$63,542</td>
-                                        	<td>Malawi</td>
-                                        	<td>Feldkirchen in Kärnten</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>6</td>
-                                        	<td>Mason Porter</td>
-                                        	<td>$78,615</td>
-                                        	<td>Chile</td>
-                                        	<td>Gloucester</td>
-                                        </tr>
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -223,30 +154,6 @@
 
         <footer class="footer">
             <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Company
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                               Blog
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
                 <p class="copyright pull-right">
                     &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
                 </p>
@@ -257,6 +164,89 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    bikes = {}
+    j = 0
+    updating_bikes = false
+    loop();
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function loop() {
+        while(true){                    
+            if(updating_bikes){
+                all_bikes = $.ajax({
+                            url: "http://fleetofbikes-env.vrqy7xh9wt.us-east-1.elasticbeanstalk.com/bike/status/all",
+                            async: false,
+                            dataType: 'json',
+
+                            success: function(data, status, xhr){
+                                    $('.error-log a').html("Error log OK")  
+                                    $('.error-log a').css('background', "#000")
+                            },
+
+                            error: function(xhr, status,error){
+                                    console.log("problem")
+                                    $('.error-log a').html("responseJSON not received from server") 
+                                    $('.error-log a').css('background', "red")
+                            }
+                        }).responseJSON 
+
+                //all_bikes = [{'id': 1, 'name': 'bike1', 'flag': 1}, {'id': 2, 'name': 'bike2',  'flag' : 3}]
+
+                for(i = 0; i < all_bikes.length; i++){
+                    console.log(i)
+                    bike = all_bikes[i]
+                    if(bikes[bike.name] == undefined){
+                        bikes[bike.name] = {'name': bike.name, 'id' : bike.id, 'status': bike.flag};
+                        console.log(bike.name)
+
+                        var table = document.getElementById("table-insert");
+                        var row = table.insertRow(-1);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+
+                        cell1.innerHTML= bike.name;
+                        cell2.innerHTML = bike.id;
+                        cell3.innerHTML = bike.flag; 
+
+
+                    } else if(bikes[bike.name]['status'] != bike.flag){ // defined, update current marker position 
+                        bikes[bike.name]['status'] = bike.flag
+                        console.log("?")
+                    }
+                }
+
+                j = j + 1;
+                console.log(j + "th iteration")
+
+                await sleep(14000) 
+            }
+            await sleep(1000)
+        }
+    }
+
+</script>
+
+<script>
+    $(".pe-7s-angle-right-circle").click(function(e) {
+        if(updating_bikes){ // currently running, turn it off 
+            updating_bikes = false; 
+            $('.pe-7s-angle-right-circle').html(" RUN")
+            $('.pe-7s-angle-right-circle').toggleClass('pe-7s-power')
+            $('.pe-7s-angle-right-circle').css('color', "green")
+        } else{ // not updating , start it 
+            updating_bikes = true; 
+            $('.pe-7s-angle-right-circle').html(" STOP")    
+            $('.pe-7s-angle-right-circle').toggleClass('pe-7s-power')
+            $('.pe-7s-angle-right-circle').css('color', "red")
+        }
+    });
+ </script>
 
 </body>
 
